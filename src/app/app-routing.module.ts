@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { UsersListComponent } from './users/users-list/users-list.component';
 
 const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sessions', component: SessionsListComponent },
   { path: 'users', component: UsersListComponent },
