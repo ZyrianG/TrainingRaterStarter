@@ -2,6 +2,7 @@ var express = require('express');
 require('./config/config');
 var models = require('./models');
 var sessions = require('./controllers/SessionsController')
+require('./global_functions');
 
 var app = express();
 
