@@ -30,5 +30,6 @@ app.get('/sessions', sessions.getAll);
 app.get('/sessions/:sessionId', sessions.get);
 
 app.get('/users', users.getAll);
+app.get('/users/:userId', users.get);
 
 module.exports = app; //lets you use this module in other places
