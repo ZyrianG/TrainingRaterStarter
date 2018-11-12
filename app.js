@@ -33,5 +33,8 @@ app.put('/sessions', sessions.update);
 
 app.get('/users', users.getAll);
 app.get('/users/:userId', users.get);
+app.post('/users', users.create);
+app.put('/users', users.update);
+app.delete('/users', users.destroy);
 
 module.exports = app; //lets you use this module in other places

@@ -82,6 +82,17 @@ const update = async function (req, res) {
       return res.json({ success: false, error: err });
     }
   
+    [err, session] = await to(session.save());
+    if (err) {
+        if (typeof err == 'object' && typeof err.message != 'undefined') {
+            err = err.message;
+        }
+        
+        if (typeof code != 'undefined') res.statusCode = code;
+        res.statusCode = 422; // unprocessable entity
+        return res.json({ success: false, error: err });
+    }
+    res.statusCode = 201;
     return res.json(session);
 }
 module.exports.update = update;
