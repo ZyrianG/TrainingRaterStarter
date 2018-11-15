@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+
+export interface IUser {
+  id: number;
+  firstName: string;
+  lastName: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 @Injectable()
 export class UsersService {
-  usersExample = [{FirstName: 'Zyrian', LastName: 'Gantuangco', Title: 'Support'},
-  {FirstName: 'Peter', LastName: 'Parker', Title: 'Spider-man'},
-  {FirstName: 'Tony', LastName: 'Stark', Title: 'Iron Man'},
-  {FirstName: 'Eugene', LastName: 'Krabs', Title: 'Krusty'},
-  {FirstName: 'Spongebob', LastName: 'Squarepants', Title: 'Sponge'},
-  ];
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+  ) { }
 
-  getUsers(): {}[] {
-    return this.usersExample;
+  getUsers(): Observable<IUser[]> {
+    return this.http.get<IUser[]>
+    ('http://localhost:3000/users');
   }
 
 }

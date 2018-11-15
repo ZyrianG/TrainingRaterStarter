@@ -18,6 +18,7 @@ export class SessionsService {
   ) { }
 
   getSessions(): Observable<ISession[]> {
-    return this.http.get<ISession[]>('http://localhost:3000/sessions');
+    return this.http.get<ISession[]>
+    ('http://localhost:3000/sessions');
   }
 }
