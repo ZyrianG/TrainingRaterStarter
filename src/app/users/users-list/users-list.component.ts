@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService, IUser } from '../users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-list',
@@ -9,7 +10,10 @@ import { UsersService, IUser } from '../users.service';
 export class UsersListComponent implements OnInit {
   users: IUser[] = [];
 
-  constructor(public usersService: UsersService) { }
+  constructor(
+    private usersService: UsersService,
+    private router: Router,
+    ) { }
 
   ngOnInit() {
     this.usersService.getUsers()
@@ -18,8 +22,12 @@ export class UsersListComponent implements OnInit {
       );
   }
 
-  addUser(first: string, last: string, title: string): void {
-    this.users.push({ id: 2, firstName: first, lastName: last, title: title, createdAt: 'today', updatedAt: 'today'});
+  addUser(): void {
+    this.router.navigate(['users/add']);
+  }
+
+  editUser(id: number): void {
+    this.router.navigate([`users/${id}`]);
   }
 
 }

@@ -1,4 +1,5 @@
 <div class="container">
+  <button class="btn btn-primary" (click)="addUser()">Add User</button>
   <div class="row">
     <div class="col-md-4"><strong>First Name</strong></div>
     <div class="col-md-4"><strong>Last Name</strong></div>
@@ -6,24 +7,11 @@
   </div>
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let user of users">
-      <div class="row">
+      <div class="row" (click)="editUser(user.id)" [style.cursor]="'pointer'">
         <div class="col-md-4">{{ user.firstName }} </div>
         <div class="col-md-4">{{ user.lastName }} </div>
         <div class="col-md-4">{{ user.title }} </div>
       </div>
     </li>
   </ul>
-  <div class="row">
-    <div class="form-group">
-      <label for="fName">First Name</label>
-        <input type="text" class="form-control" id="first" required>
-      <label for="lName">Last Name:</label>
-        <input type="text" class="form-control" id="last" required>
-      <label for="Rtitle">Title:</label>
-        <input type="text" class="form-control" id="title" required>
-    </div>
-    <div class="row">
-      <button class="btn btn-primary" (click)="addUser(first, last, title)">Add New User</button>
-    </div>
-  </div>
 </div>

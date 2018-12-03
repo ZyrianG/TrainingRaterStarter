@@ -1,6 +1,6 @@
 const Users = require('../models').Users;
 
-const getAll = async (req, res) => {
+const getAll = async function (req, res) {
     res.setHeader('Content-Type', 'application/json'); // return type for application
     let err, users; // defining variables
     
@@ -48,16 +48,6 @@ const create = async (req, res) => {
         return res.json({ success: false, error: err });
     }
 
-    [err, user] = await to(user.save())
-    if (err) {
-        if (typeof err == 'object' && typeof err.message != 'undefined') {
-            err = err.message;
-        }
-        
-        if (typeof code != 'undefined') res.statusCode = code;
-        res.statusCode = 422; // unprocessable entity
-        return res.json({ success: false, error: err });
-    }
     res.statusCode = 201;
     return res.json(user);
 }
@@ -85,16 +75,6 @@ const update = async (req, res) => {
         return res.json({ success: false, error: err });
       }
 
-      [err, user] = await to(user.save())
-      if (err) {
-        if (typeof err == 'object' && typeof err.message != 'undefined') {
-            err = err.message;
-        }
-        
-        if (typeof code != 'undefined') res.statusCode = code;
-        res.statusCode = 422; // unprocessable entity
-        return res.json({ success: false, error: err });
-    }
     res.statusCode = 201;
     return res.json(user);
 }

@@ -51,7 +51,6 @@ export class SessionsDetailComponent implements OnInit {
   save(): void {
     this.sessionsService.save(this.session)
       .subscribe((session) => {
-      console.log(session);
       this.router.navigate(['sessions']);
       });
   }
