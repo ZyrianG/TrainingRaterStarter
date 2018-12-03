@@ -23,7 +23,11 @@ export class SessionsListComponent implements OnInit {
     // this.sessions = this.sessionsService.getSessions();
   }
 
-  goToSessionDetail(idParam: number | string): void {
-    this.router.navigate(['sessions', idParam]);
+  goToAdd(): void {
+    this.router.navigate(['sessions/add']);
+  }
+
+  goToEdit(id: number): void {
+    this.router.navigate([`sessions/${id}`]);
   }
 }

@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs/observable';
 
 export interface ISession {
   id: number;
   name: string;
   location: string;
-  startTime: Date;
-  createdAt: Date;
-  updatedAt: Date;
+  startTime: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 @Injectable()
@@ -18,16 +19,18 @@ export class SessionsService {
   ) { }
 
   getSessions(): Observable<ISession[]> {
-    return this.http.get<ISession[]>
-    ('http://localhost:3000/sessions');
+    return this.http.get<ISession[]>('http://localhost:3000/sessions');
   }
 
   getSessionById(id: number) {
-
+    return this.http.get<ISession[]>(`http://localhost:3000/${id}`);
   }
-  
-  createSession(session: ISession): Observable<ISession> {
-    return this.http.post<ISession>
-    ('http://localhost:3000/sessions', session);
+
+  save(session: ISession): Observable<ISession> {
+    if (session.id) {
+      return this.http.put<ISession>('http://localhost:3000/sessions', session);
+    } else {
+      return this.http.post<ISession>('http://localhost:3000/sessions', session);
+    }
   }
 }
