@@ -32,8 +32,5 @@ export class SessionsDetailComponent implements OnInit {
 
   submit(): void {
     console.log(this.session);
-    console.log(defaultSession);
-    this.sessionsService.createSession(this.session)
-      .subscribe
   }
 }
