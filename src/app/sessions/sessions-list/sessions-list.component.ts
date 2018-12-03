@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./sessions-list.component.css']
 })
 export class SessionsListComponent implements OnInit {
-  sessions: ISession[] = [
-  ];
+  sessions: ISession[] = [];
+
   constructor(
     private sessionsService: SessionsService,
     private router: Router,
@@ -18,9 +18,9 @@ export class SessionsListComponent implements OnInit {
   ngOnInit() {
     this.sessionsService.getSessions()
       .subscribe(
-        (sessions) => this.sessions = sessions,
-        );
-    // this.sessions = this.sessionsService.getSessions();
+        (sessions) => {
+          this.sessions = sessions;
+        });
   }
 
   goToAdd(): void {

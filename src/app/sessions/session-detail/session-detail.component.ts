@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionsService, ISession } from '../sessions.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { parse } from 'path';
+import { ISession, SessionsService } from '../sessions.service';
+
 
 @Component({
   templateUrl: './session-detail.component.html',
@@ -11,9 +11,9 @@ export class SessionsDetailComponent implements OnInit {
   session: ISession;
 
   constructor(
-    private sessionsService: SessionsService,
     private route: ActivatedRoute,
     private router: Router,
+    private sessionsService: SessionsService,
   ) { }
 
   ngOnInit() {
@@ -23,12 +23,12 @@ export class SessionsDetailComponent implements OnInit {
     if (id > 0) {
       // get from db
       this.sessionsService.getSessionById(id)
-      .subscribe((session) => {
+        .subscribe((session) => {
           const startTime = new Date(session.startTime);
           startTime.setHours(startTime.getHours() - (startTime.getTimezoneOffset() / 60));
           session.startTime = startTime.toISOString().slice(0, 16);
           this.session = session;
-      });
+        });
     } else {
       // new
       this.session = {
@@ -40,18 +40,20 @@ export class SessionsDetailComponent implements OnInit {
         updatedAt: '',
       };
     }
-    console.log(this.session);
   }
 
   getLocalDateTime(): string {
     const startTime = new Date();
     startTime.setHours(startTime.getHours() - (startTime.getTimezoneOffset() / 60));
     return startTime.toISOString().slice(0, 16);
-}
+  }
 
   save(): void {
     this.sessionsService.save(this.session)
-      .subscribe((session) => console.log(session));
+      .subscribe((session) => {
+      console.log(session);
+      this.router.navigate(['sessions']);
+      });
   }
 
   cancel(): void {

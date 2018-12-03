@@ -9,7 +9,7 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sessions', component: SessionsListComponent },
-  { path: 'sessions/:entityId', component: SessionsDetailComponent },
+  { path: 'sessions/:sessionId', component: SessionsDetailComponent },
   { path: 'users', component: UsersListComponent },
 ];
 

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs/observable';
+// tslint:disable-next-line:import-blacklist
+import { Observable } from 'rxjs';
 
 export interface ISession {
   id: number;
@@ -22,15 +23,15 @@ export class SessionsService {
     return this.http.get<ISession[]>('http://localhost:3000/sessions');
   }
 
-  getSessionById(id: number) {
-    return this.http.get<ISession[]>(`http://localhost:3000/${id}`);
+  getSessionById(id: number): Observable<ISession> {
+    return this.http.get<ISession>(`http://localhost:3000/sessions/${id}`);
   }
 
-  save(session: ISession): Observable<ISession> {
+  save(session: ISession): Observable<ISession | number[]> {
     if (session.id) {
-      return this.http.put<ISession>('http://localhost:3000/sessions', session);
+      return this.http.put<number[]>(`http://localhost:3000/sessions`, session);
     } else {
-      return this.http.post<ISession>('http://localhost:3000/sessions', session);
+      return this.http.post<ISession>(`http://localhost:3000/sessions`, session);
     }
   }
 }

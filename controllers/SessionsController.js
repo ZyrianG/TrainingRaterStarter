@@ -64,35 +64,25 @@ const create = async function (req, res) {
 module.exports.create = create;
 
 const update = async function (req, res) {
-    let err, session, data;
-    data = req.body;
-  
-    [err, session] = await to(Sessions.update(data, {
-      where: {
-        id: data.id
-      }
-    }));
-    if (err) {
-      if (typeof err == 'object' && typeof err.message != 'undefined') {
-        err = err.message;
-      }
-  
-      if (typeof code !== 'undefined') res.statusCode = code;
-      res.statusCode = 422
-      return res.json({ success: false, error: err });
+  let err, session, data;
+  data = req.body;
+
+
+  [err, session] = await to(Sessions.update(data, {
+    where: {
+      id: data.id
     }
-  
-    [err, session] = await to(session.save());
-    if (err) {
-        if (typeof err == 'object' && typeof err.message != 'undefined') {
-            err = err.message;
-        }
-        
-        if (typeof code != 'undefined') res.statusCode = code;
-        res.statusCode = 422; // unprocessable entity
-        return res.json({ success: false, error: err });
+  }));
+  if (err) {
+    if (typeof err == 'object' && typeof err.message != 'undefined') {
+      err = err.message;
     }
-    res.statusCode = 201;
-    return res.json(session);
+
+    if (typeof code !== 'undefined') res.statusCode = code;
+    res.statusCode = 422
+    return res.json({ success: false, error: err });
+  }
+
+  return res.json(session);
 }
 module.exports.update = update;
