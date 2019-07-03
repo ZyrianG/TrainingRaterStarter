@@ -52,6 +52,20 @@ const create = async function (req, res) {
 }
 module.exports.create = create;
 
+// const update = async (res, req) => {
+//     let err, warframe, data;
+//     warframe = req.warframes;
+
+//     data = req.body;
+//     warframe.set(data);
+
+//     [err, warframe] = await to(warframe.save());
+//     if (err) return ReE(res, err);
+
+//     return res.json(warframe);
+// }
+// module.exports.update = update;
+
 const update = async function (req, res) {
   let err, session, data;
   data = req.body;

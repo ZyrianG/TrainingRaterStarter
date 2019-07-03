@@ -15,23 +15,26 @@ export interface ISession {
 
 @Injectable()
 export class SessionsService {
+
+  apiURL = 'http://localhost:5001/sessions';
+
   constructor(
     private http: HttpClient,
   ) { }
 
   getSessions(): Observable<ISession[]> {
-    return this.http.get<ISession[]>('http://localhost:3000/sessions');
+    return this.http.get<ISession[]>(`${this.apiURL}`);
   }
 
   getSessionById(id: number): Observable<ISession> {
-    return this.http.get<ISession>(`http://localhost:3000/sessions/${id}`);
+    return this.http.get<ISession>(`${this.apiURL}/${id}`);
   }
 
   save(session: ISession): Observable<ISession | number[]> {
     if (session.id) {
-      return this.http.put<number[]>(`http://localhost:3000/sessions`, session);
+      return this.http.put<number[]>(`${this.apiURL}`, session);
     } else {
-      return this.http.post<ISession>(`http://localhost:3000/sessions`, session);
+      return this.http.post<ISession>(`${this.apiURL}`, session);
     }
   }
 }
